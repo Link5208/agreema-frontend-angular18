@@ -161,6 +161,14 @@ const NavigationItems = [
         ],
       },
       {
+        id: 'contract',
+        title: 'Contract',
+        type: 'item',
+        url: '/contract',
+        classes: 'nav-item',
+        icon: 'feather icon-sidebar',
+      },
+      {
         id: 'sample-page',
         title: 'Sample Page',
         type: 'item',

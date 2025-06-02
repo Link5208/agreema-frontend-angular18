@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
+import { ContractComponent } from './component/contract/contract.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,13 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./demo/dashboard/dashboard.component'),
+      },
+      {
+        path: 'contract',
+        loadComponent: () =>
+          import('./component/contract/contract.component').then(
+            (m) => m.ContractComponent,
+          ),
       },
       {
         path: 'basic',
