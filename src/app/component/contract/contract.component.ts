@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import TblBootstrapComponent from '../../demo/pages/tables/tbl-bootstrap/tbl-bootstrap.component';
+import { ContractService } from 'src/services/contract/contract.service';
+import { Contract } from 'src/app/models/Contract';
 
 @Component({
   selector: 'app-contract',
   standalone: true,
-  imports: [SharedModule, TblBootstrapComponent],
+  imports: [SharedModule],
   templateUrl: './contract.component.html',
   styleUrl: './contract.component.scss',
 })
-export class ContractComponent {}
+export class ContractComponent implements OnInit {
+  contractList: Contract[] = [];
+  private contractService = inject(ContractService);
+  showColumns = {
+    id: true,
+    name: true,
+    signDate: true,
+    status: true,
+    action: true,
+  };
+  ngOnInit(): void {
+    this.contractList = this.contractService.getAll();
+  }
+}

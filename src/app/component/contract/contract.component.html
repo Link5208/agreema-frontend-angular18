@@ -1,7 +1,28 @@
-<p>contract works!</p>
 <div class="col-xl-12">
+  <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
+    <button class="btn btn-secondary" ngbDropdownToggle type="button">
+      Columns
+    </button>
+    <div ngbDropdownMenu>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showColumns.id" /> Id
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showColumns.name" /> Name
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showColumns.signDate" /> Sign date
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showColumns.status" /> Status
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showColumns.action" /> Action
+      </label>
+    </div>
+  </div>
   <app-card
-    cardTitle="Striped Table"
+    cardTitle="Contract"
     [options]="false"
     blockClass="table-border-style"
   >
@@ -9,33 +30,70 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th *ngIf="showColumns.id">Id</th>
+            <th *ngIf="showColumns.name">Name</th>
+            <th *ngIf="showColumns.signDate">Sign date</th>
+            <th *ngIf="showColumns.status">Status</th>
+            <th *ngIf="showColumns.action">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>&#64;mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>&#64;fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>&#64;twitter</td>
-          </tr>
+          @for (contract of contractList; track $index) {
+            <tr>
+              <th *ngIf="showColumns.id" scope="row">
+                {{ contract.contractId }}
+              </th>
+              <td *ngIf="showColumns.name">{{ contract.name }}</td>
+              <td *ngIf="showColumns.signDate">{{ contract.signDate }}</td>
+              <td *ngIf="showColumns.status">{{ contract.status }}</td>
+              <td *ngIf="showColumns.action">
+                <div class="btn-group" role="group">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btnchecklitecol1"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label class="btn btn-light-primary" for="btnchecklitecol1"
+                    >Edit</label
+                  >
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btnchecklitecol2"
+                    autocomplete="off"
+                    checked
+                  />
+
+                  <label class="btn btn-light-danger" for="btnchecklitecol3"
+                    >Delete</label
+                  >
+                </div>
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
   </app-card>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="javascript:">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
