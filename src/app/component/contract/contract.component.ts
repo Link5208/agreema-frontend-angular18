@@ -54,6 +54,7 @@ export class ContractComponent implements OnInit {
     this.contractList = this.contractService.getAll();
   }
   showEditContractForm = false;
+  showCreateItemForm = false;
   selectedContract: any = {};
 
   editContract(contract: any) {
@@ -71,6 +72,30 @@ export class ContractComponent implements OnInit {
         this.contractList[idx] = { ...this.selectedContract };
       }
       this.showEditContractForm = false;
+    }
+  }
+  onCreateItemSubmit(form: any) {
+    if (form.valid) {
+      // Thêm item vào danh sách hoặc gọi API
+      // this.selectedContract.items.push(form.value);
+      this.showCreateItemForm = false;
+      form.resetForm();
+    }
+  }
+
+  showEditItemForm = false;
+  selectedItem: any = {};
+
+  editItem(item: any) {
+    this.selectedItem = { ...item };
+    this.showEditItemForm = true;
+  }
+
+  onEditItemSubmit(form: any) {
+    if (form.valid) {
+      // Cập nhật lại item trong danh sách (hoặc gọi API)
+      // Ví dụ: tìm item trong contract.items và cập nhật
+      this.showEditItemForm = false;
     }
   }
 }

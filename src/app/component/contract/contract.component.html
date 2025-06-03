@@ -235,7 +235,11 @@
               <td [attr.colspan]="getColspan()">
                 <div class="card-body mt-2 border">
                   <div class="mb-2 text-end">
-                    <button type="button" class="btn btn-sm btn-primary">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-primary"
+                      (click)="showCreateItemForm = true"
+                    >
                       + Add Item
                     </button>
                   </div>
@@ -284,6 +288,7 @@
                               <label
                                 class="btn btn-light-primary"
                                 for="btnchecklitecol1"
+                                (click)="editItem(item)"
                                 >Edit</label
                               >
                               <input
@@ -411,6 +416,194 @@
         type="button"
         class="btn btn-secondary ms-2"
         (click)="showEditContractForm = false"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+<!-- Popup Create Item Form -->
+<div
+  *ngIf="showCreateItemForm"
+  class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+  style="background: rgba(0, 0, 0, 0.2); z-index: 2000"
+>
+  <form
+    #createItemForm="ngForm"
+    (ngSubmit)="onCreateItemSubmit(createItemForm)"
+    class="bg-white border p-4 rounded shadow"
+    style="min-width: 400px"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="mb-0">Create Item</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="showCreateItemForm = false"
+      ></button>
+    </div>
+    <div class="mb-3">
+      <label for="itemId" class="form-label">Item ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="itemId"
+        name="itemId"
+        ngModel
+        required
+        placeholder="Enter item ID"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        ngModel
+        required
+        placeholder="Enter name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="unit" class="form-label">Unit</label>
+      <input
+        type="text"
+        class="form-control"
+        id="unit"
+        name="unit"
+        ngModel
+        required
+        placeholder="Enter unit"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="quantity"
+        name="quantity"
+        ngModel
+        required
+        placeholder="Enter quantity"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        name="price"
+        ngModel
+        required
+        step="any"
+        placeholder="Enter price"
+      />
+    </div>
+    <div class="text-end">
+      <button type="submit" class="btn btn-success">Save</button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="showCreateItemForm = false"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+<!-- Popup Edit Item Form -->
+<div
+  *ngIf="showEditItemForm"
+  class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+  style="background: rgba(0, 0, 0, 0.2); z-index: 2000"
+>
+  <form
+    #editItemForm="ngForm"
+    (ngSubmit)="onEditItemSubmit(editItemForm)"
+    class="bg-white border p-4 rounded shadow"
+    style="min-width: 400px"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="mb-0">Edit Item</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="showEditItemForm = false"
+      ></button>
+    </div>
+    <div class="mb-3">
+      <label for="editItemId" class="form-label">Item ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="editItemId"
+        name="itemId"
+        [(ngModel)]="selectedItem.itemId"
+        required
+        placeholder="Enter item ID"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="editName" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="editName"
+        name="name"
+        [(ngModel)]="selectedItem.name"
+        required
+        placeholder="Enter name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="editUnit" class="form-label">Unit</label>
+      <input
+        type="text"
+        class="form-control"
+        id="editUnit"
+        name="unit"
+        [(ngModel)]="selectedItem.unit"
+        required
+        placeholder="Enter unit"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="editQuantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="editQuantity"
+        name="quantity"
+        [(ngModel)]="selectedItem.quantity"
+        required
+        placeholder="Enter quantity"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="editPrice" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="editPrice"
+        name="price"
+        [(ngModel)]="selectedItem.price"
+        required
+        step="any"
+        placeholder="Enter price"
+      />
+    </div>
+    <div class="text-end">
+      <button type="submit" class="btn btn-success">Save</button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="showEditItemForm = false"
       >
         Cancel
       </button>
