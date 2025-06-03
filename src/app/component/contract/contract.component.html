@@ -1,59 +1,160 @@
 <div class="col-xl-12">
-  <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
-    <button class="btn btn-secondary" ngbDropdownToggle type="button">
-      Contract Columns
-    </button>
-    <div ngbDropdownMenu>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showContractColumns.id" /> ID
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showContractColumns.name" /> Name
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showContractColumns.signDate" />
-        Sign date
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showContractColumns.status" />
-        Status
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showContractColumns.action" />
-        Action
-      </label>
+  <div class="d-flex align-items-center mb-3 justify-content-between flex-wrap">
+    <div class="d-flex align-items-center flex-wrap">
+      <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
+        <button class="btn btn-secondary" ngbDropdownToggle type="button">
+          Contract Columns
+        </button>
+        <div ngbDropdownMenu>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showContractColumns.id" /> ID
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showContractColumns.name" />
+            Name
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showContractColumns.signDate" />
+            Sign date
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showContractColumns.status" />
+            Status
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showContractColumns.action" />
+            Action
+          </label>
+        </div>
+      </div>
+      <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
+        <button class="btn btn-secondary" ngbDropdownToggle type="button">
+          Item Columns
+        </button>
+        <div ngbDropdownMenu>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.id" /> ID
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.name" /> Name
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.unit" />
+            Unit
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.quantity" />
+            Quantity
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.price" />
+            Price
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" [(ngModel)]="showItemColumns.total" />
+            Price
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-1 d-flex justify-content-end align-items-center">
+      <button
+        class="btn btn-primary"
+        (click)="showContractForm = !showContractForm"
+      >
+        {{ showContractForm ? "Close" : "Create Contract" }}
+      </button>
+      <button type="button" class="btn btn-success me-2">Excel</button>
     </div>
   </div>
-  <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
-    <button class="btn btn-secondary" ngbDropdownToggle type="button">
-      Item Columns
-    </button>
-    <div ngbDropdownMenu>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.id" /> ID
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.name" /> Name
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.unit" />
-        Unit
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.quantity" />
-        Quantity
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.price" />
-        Price
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showItemColumns.total" />
-        Price
-      </label>
-    </div>
+  <!-- Contract Form -->
+  <!-- Popup Contract Form -->
+  <!-- Popup Contract Form -->
+  <div
+    *ngIf="showContractForm"
+    class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+    style="background: rgba(0, 0, 0, 0.2); z-index: 2000"
+  >
+    <form
+      #contractForm="ngForm"
+      (ngSubmit)="onSubmit(contractForm)"
+      class="bg-white border p-4 rounded shadow"
+      style="min-width: 600px"
+    >
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Create Contract</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="showContractForm = false"
+        ></button>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="id">ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            name="id"
+            ngModel
+            required
+            placeholder="Enter ID"
+          />
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            ngModel
+            required
+            placeholder="Enter name"
+          />
+        </div>
+        <div class="form-group col-md-12">
+          <label for="signDate">Sign Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="signDate"
+            name="signDate"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group col-md-12">
+          <label for="status">Status</label>
+          <select
+            class="form-control"
+            id="status"
+            name="status"
+            ngModel
+            required
+          >
+            <option value="" disabled selected>Select status</option>
+            <option value="UNLIQUIDATED">UNLIQUIDATED</option>
+            <option value="LIQUIDATED">LIQUIDATED</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3 text-end">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button
+          type="button"
+          class="btn btn-secondary ms-2"
+          (click)="showContractForm = false"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   </div>
-  <button type="button" class="btn btn-success float-end">Excel</button>
   <app-card
     cardTitle="Contract"
     [options]="false"
@@ -82,9 +183,11 @@
               </td>
               <td *ngIf="showContractColumns.status">{{ contract.status }}</td>
               <td *ngIf="showContractColumns.action">
+                <!-- <button type="button" class="btn btn-success">Excel</button> -->
+
                 <div class="btn-group" role="group">
                   <input
-                    type="checkbox"
+                    type="radio"
                     class="btn-check"
                     id="btnchecklitecol1"
                     autocomplete="off"
@@ -94,19 +197,19 @@
                     >Excel</label
                   >
                   <input
-                    type="checkbox"
+                    type="radio"
                     class="btn-check"
-                    id="btnchecklitecol1"
+                    id="btnchecklitecol2"
                     autocomplete="off"
                     checked
                   />
-                  <label class="btn btn-light-primary" for="btnchecklitecol1"
+                  <label class="btn btn-light-primary" for="btnchecklitecol2"
                     >Edit</label
                   >
                   <input
-                    type="checkbox"
+                    type="radio"
                     class="btn-check"
-                    id="btnchecklitecol2"
+                    id="btnchecklitecol3"
                     autocomplete="off"
                     checked
                   />
@@ -130,6 +233,11 @@
             <tr *ngIf="collapsedRows[$index]">
               <td [attr.colspan]="getColspan()">
                 <div class="card-body mt-2 border">
+                  <div class="mb-2 text-end">
+                    <button type="button" class="btn btn-sm btn-primary">
+                      + Add Item
+                    </button>
+                  </div>
                   <table class="table">
                     <thead>
                       <tr>
@@ -166,7 +274,7 @@
                           <td *ngIf="showItemColumns.action">
                             <div class="btn-group" role="group">
                               <input
-                                type="checkbox"
+                                type="radio"
                                 class="btn-check"
                                 id="btnchecklitecol1"
                                 autocomplete="off"
@@ -178,7 +286,7 @@
                                 >Edit</label
                               >
                               <input
-                                type="checkbox"
+                                type="radio"
                                 class="btn-check"
                                 id="btnchecklitecol2"
                                 autocomplete="off"

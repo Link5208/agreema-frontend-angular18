@@ -24,6 +24,16 @@ export class ContractComponent implements OnInit {
     // Return the number of visible columns
     return Object.values(this.showContractColumns).filter(Boolean).length;
   }
+  showContractForm = false;
+
+  onSubmit(form: any) {
+    if (form.valid) {
+      // Add contract to your contractList or handle as needed
+      this.contractList.push(form.value);
+      this.showContractForm = false;
+      form.resetForm();
+    }
+  }
   showContractColumns = {
     id: true,
     name: true,
