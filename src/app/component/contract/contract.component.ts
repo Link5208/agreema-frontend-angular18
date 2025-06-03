@@ -53,4 +53,24 @@ export class ContractComponent implements OnInit {
   ngOnInit(): void {
     this.contractList = this.contractService.getAll();
   }
+  showEditContractForm = false;
+  selectedContract: any = {};
+
+  editContract(contract: any) {
+    this.selectedContract = { ...contract }; // clone để tránh binding trực tiếp
+    this.showEditContractForm = true;
+  }
+
+  onEditSubmit(form: any) {
+    if (form.valid) {
+      // Cập nhật contractList với selectedContract đã chỉnh sửa
+      const idx = this.contractList.findIndex(
+        (c) => c.id === this.selectedContract.id,
+      );
+      if (idx > -1) {
+        this.contractList[idx] = { ...this.selectedContract };
+      }
+      this.showEditContractForm = false;
+    }
+  }
 }

@@ -120,7 +120,7 @@
         <div class="form-group col-md-12">
           <label for="signDate">Sign Date</label>
           <input
-            type="date"
+            type="datetime-local"
             class="form-control"
             id="signDate"
             name="signDate"
@@ -202,6 +202,7 @@
                     id="btnchecklitecol2"
                     autocomplete="off"
                     checked
+                    (click)="editContract(contract)"
                   />
                   <label class="btn btn-light-primary" for="btnchecklitecol2"
                     >Edit</label
@@ -331,4 +332,88 @@
       </li>
     </ul>
   </nav> -->
+</div>
+<!-- Edit Contract Popup Form -->
+<div
+  *ngIf="showEditContractForm"
+  class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+  style="background: rgba(0, 0, 0, 0.2); z-index: 2000"
+>
+  <form
+    #editContractForm="ngForm"
+    (ngSubmit)="onEditSubmit(editContractForm)"
+    class="bg-white border p-4 rounded shadow"
+    style="min-width: 600px"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="mb-0">Edit Contract</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="showEditContractForm = false"
+      ></button>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="editId">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="editId"
+          name="id"
+          [(ngModel)]="selectedContract.id"
+          required
+          placeholder="Enter ID"
+        />
+      </div>
+      <div class="form-group col-md-12">
+        <label for="editName">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="editName"
+          name="name"
+          [(ngModel)]="selectedContract.name"
+          required
+          placeholder="Enter name"
+        />
+      </div>
+      <div class="form-group col-md-12">
+        <label for="editSignDate">Sign Date</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="editSignDate"
+          name="signDate"
+          [(ngModel)]="selectedContract.signDate"
+          required
+        />
+      </div>
+      <div class="form-group col-md-12">
+        <label for="editStatus">Status</label>
+        <select
+          class="form-control"
+          id="editStatus"
+          name="status"
+          [(ngModel)]="selectedContract.status"
+          required
+        >
+          <option value="" disabled>Select status</option>
+          <option value="UNLIQUIDATED">UNLIQUIDATED</option>
+          <option value="LIQUIDATED">LIQUIDATED</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-3 text-end">
+      <button type="submit" class="btn btn-success">Save</button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="showEditContractForm = false"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
 </div>
