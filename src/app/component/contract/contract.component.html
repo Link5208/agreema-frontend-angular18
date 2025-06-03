@@ -1,23 +1,55 @@
 <div class="col-xl-12">
   <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
     <button class="btn btn-secondary" ngbDropdownToggle type="button">
-      Columns
+      Contract Columns
     </button>
     <div ngbDropdownMenu>
       <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showColumns.id" /> Id
+        <input type="checkbox" [(ngModel)]="showContractColumns.id" /> ID
       </label>
       <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showColumns.name" /> Name
+        <input type="checkbox" [(ngModel)]="showContractColumns.name" /> Name
       </label>
       <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showColumns.signDate" /> Sign date
+        <input type="checkbox" [(ngModel)]="showContractColumns.signDate" />
+        Sign date
       </label>
       <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showColumns.status" /> Status
+        <input type="checkbox" [(ngModel)]="showContractColumns.status" />
+        Status
       </label>
       <label class="dropdown-item">
-        <input type="checkbox" [(ngModel)]="showColumns.action" /> Action
+        <input type="checkbox" [(ngModel)]="showContractColumns.action" />
+        Action
+      </label>
+    </div>
+  </div>
+  <div class="btn-group mb-2 me-2" ngbDropdown [placement]="'bottom-left'">
+    <button class="btn btn-secondary" ngbDropdownToggle type="button">
+      Item Columns
+    </button>
+    <div ngbDropdownMenu>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.id" /> ID
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.name" /> Name
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.unit" />
+        Unit
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.quantity" />
+        Quantity
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.price" />
+        Price
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" [(ngModel)]="showItemColumns.total" />
+        Price
       </label>
     </div>
   </div>
@@ -31,23 +63,25 @@
       <table class="table">
         <thead>
           <tr>
-            <th *ngIf="showColumns.id">Id</th>
-            <th *ngIf="showColumns.name">Name</th>
-            <th *ngIf="showColumns.signDate">Sign date</th>
-            <th *ngIf="showColumns.status">Status</th>
-            <th *ngIf="showColumns.action">Action</th>
+            <th *ngIf="showContractColumns.id">ID</th>
+            <th *ngIf="showContractColumns.name">Name</th>
+            <th *ngIf="showContractColumns.signDate">Sign date</th>
+            <th *ngIf="showContractColumns.status">Status</th>
+            <th *ngIf="showContractColumns.action">Action</th>
           </tr>
         </thead>
         <tbody>
           @for (contract of contractList; track $index) {
             <tr class="card-header">
-              <th *ngIf="showColumns.id" scope="row">
+              <th *ngIf="showContractColumns.id" scope="row">
                 {{ contract.contractId }}
               </th>
-              <td *ngIf="showColumns.name">{{ contract.name }}</td>
-              <td *ngIf="showColumns.signDate">{{ contract.signDate }}</td>
-              <td *ngIf="showColumns.status">{{ contract.status }}</td>
-              <td *ngIf="showColumns.action">
+              <td *ngIf="showContractColumns.name">{{ contract.name }}</td>
+              <td *ngIf="showContractColumns.signDate">
+                {{ contract.signDate }}
+              </td>
+              <td *ngIf="showContractColumns.status">{{ contract.status }}</td>
+              <td *ngIf="showContractColumns.action">
                 <div class="btn-group" role="group">
                   <input
                     type="checkbox"
@@ -99,40 +133,38 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th *ngIf="showColumns.id">Id</th>
-                        <th *ngIf="showColumns.name">Name</th>
-                        <th *ngIf="showColumns.signDate">Sign date</th>
-                        <th *ngIf="showColumns.status">Status</th>
-                        <th *ngIf="showColumns.action">Action</th>
+                        <th *ngIf="showItemColumns.id">ID</th>
+                        <th *ngIf="showItemColumns.name">Name</th>
+                        <th *ngIf="showItemColumns.unit">Unit</th>
+                        <th *ngIf="showItemColumns.quantity">Quantity</th>
+                        <th *ngIf="showItemColumns.price">Price</th>
+                        <th *ngIf="showItemColumns.total">Total</th>
+                        <th *ngIf="showItemColumns.action">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @for (contract of contractList; track $index) {
+                      @for (item of contract.items; track $index) {
                         <tr class="card-header">
-                          <th *ngIf="showColumns.id" scope="row">
-                            {{ contract.contractId }}
+                          <th *ngIf="showItemColumns.id" scope="row">
+                            {{ item.itemId }}
                           </th>
-                          <td *ngIf="showColumns.name">{{ contract.name }}</td>
-                          <td *ngIf="showColumns.signDate">
-                            {{ contract.signDate }}
+                          <td *ngIf="showItemColumns.name">
+                            {{ item.name }}
                           </td>
-                          <td *ngIf="showColumns.status">
-                            {{ contract.status }}
+                          <td *ngIf="showItemColumns.unit">
+                            {{ item.unit }}
                           </td>
-                          <td *ngIf="showColumns.action">
+                          <td *ngIf="showItemColumns.quantity">
+                            {{ item.quantity }}
+                          </td>
+                          <td *ngIf="showItemColumns.price">
+                            {{ item.price }}
+                          </td>
+                          <td *ngIf="showItemColumns.total">
+                            {{ item.total }}
+                          </td>
+                          <td *ngIf="showItemColumns.action">
                             <div class="btn-group" role="group">
-                              <input
-                                type="checkbox"
-                                class="btn-check"
-                                id="btnchecklitecol1"
-                                autocomplete="off"
-                                checked
-                              />
-                              <label
-                                class="btn btn-light-success"
-                                for="btnchecklitecol1"
-                                >Excel</label
-                              >
                               <input
                                 type="checkbox"
                                 class="btn-check"
@@ -158,16 +190,6 @@
                                 for="btnchecklitecol3"
                                 >Delete</label
                               >
-
-                              <button
-                                type="button"
-                                class="btn btn-secondary"
-                                (click)="toggleCollapse($index)"
-                                [attr.aria-expanded]="!false"
-                                aria-controls="collapseExample"
-                              >
-                                Details
-                              </button>
                             </div>
                           </td>
                         </tr>
@@ -182,7 +204,7 @@
       </table>
     </div>
   </app-card>
-  <nav aria-label="Page navigation example">
+  <!-- <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
       <li class="page-item disabled">
         <a class="page-link" href="javascript:">Previous</a>
@@ -200,5 +222,5 @@
         <a class="page-link" href="javascript:">Next</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 </div>
