@@ -14,6 +14,16 @@ import { Contract } from 'src/app/models/Contract';
 export class ContractComponent implements OnInit {
   contractList: Contract[] = [];
   private contractService = inject(ContractService);
+  collapsedRows: boolean[] = [];
+
+  toggleCollapse(index: number) {
+    this.collapsedRows[index] = !this.collapsedRows[index];
+  }
+
+  getColspan() {
+    // Return the number of visible columns
+    return Object.values(this.showColumns).filter(Boolean).length;
+  }
   showColumns = {
     id: true,
     name: true,
